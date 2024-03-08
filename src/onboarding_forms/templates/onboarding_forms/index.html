@@ -1,0 +1,15 @@
+<!-- establishments/templates/establishments/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Choose Establishment Type</title>
+</head>
+<body>
+    <h2>Choose Establishment Type</h2>
+    <form method="post" action="{% url 'index' %}">
+        {% csrf_token %}
+        {{ establishment_type_form.as_p }}
+        <input type="submit" value="Next">
+    </form>
+</body>
+</html>
