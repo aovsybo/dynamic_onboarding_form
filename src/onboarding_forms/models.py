@@ -28,7 +28,7 @@ class Establishment(models.Model):
     title = models.CharField('Название заведения', max_length=255)
     city = models.CharField('Страна и город', max_length=255)
     address = models.CharField('Адрес', max_length=400)
-    establishment_type = models.ForeignKey(EstablishmentType, name='Тип заведения', on_delete=models.PROTECT)
+    establishment_type = models.ForeignKey(EstablishmentType, verbose_name='Тип заведения', on_delete=models.PROTECT)
     is_new = models.BooleanField('Зто новое заведение')
 
     def __str__(self):
