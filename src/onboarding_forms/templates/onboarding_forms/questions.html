@@ -1,15 +1,10 @@
-<!-- establishments/templates/establishments/questions.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Answer Establishment Questions</title>
-</head>
-<body>
-    <h2>Answer Establishment Questions</h2>
-    <form method="post" action="{% url 'index' %}">
-        {% csrf_token %}
-        {{ question_form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+<!-- questions.html -->
+<form method="post">
+    {% csrf_token %}
+    <h2>Answer the following questions:</h2>
+    {% for question in questions %}
+        <label>{{ question.question_text }}</label>
+        <input type="text" name="response{{ question.id }}"><br>
+    {% endfor %}
+    <button type="submit">Submit</button>
+</form>

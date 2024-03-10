@@ -25,3 +25,12 @@ class Establishment(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ClientResponse(models.Model):
+    establishment = models.ForeignKey(Establishment, on_delete=models.CASCADE)
+    question = models.ForeignKey(EstablishmentQuestion, on_delete=models.CASCADE)
+    response_text = models.TextField()
+
+    def __str__(self):
+        return f"{self.establishment} -> {self.question}"
