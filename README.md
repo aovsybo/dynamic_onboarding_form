@@ -33,7 +33,7 @@ http://0.0.0.0:8000/admin/
 Панель добавления объектов:
 ![image](https://github.com/aovsybo/dynamic_onboarding_form/assets/66824112/b8c4562e-ca95-4c2d-b588-e75c8546a6b0)
 
-Добавляем типы заведений:
+Добавляем типы заведений: <br>
 ![image](https://github.com/aovsybo/dynamic_onboarding_form/assets/66824112/ae230496-f042-4c72-b640-a1c43d69fbf2)
 
 Добавляем вопросы для каждого из типов:
@@ -54,6 +54,7 @@ http://0.0.0.0:8000/
 ![image](https://github.com/aovsybo/dynamic_onboarding_form/assets/66824112/955a12c7-4831-4a95-aab0-2fe5e9fa7d1e)
 
 Получаем список всех заведений:
-![image](https://github.com/aovsybo/dynamic_onboarding_form/assets/66824112/c6f59173-cd66-4a1c-adb3-d2c9be981b46)
+![image](https://github.com/aovsybo/dynamic_onboarding_form/assets/66824112/53c30a88-b1ac-4adc-ae12-1adebc88c805)
+
 
 
