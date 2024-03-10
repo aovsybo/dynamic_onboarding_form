@@ -1,0 +1,25 @@
+{% extends 'onboarding_forms/base.html' %}
+
+{% block title %}Список заведений{% endblock %}
+
+{% block content %}
+
+<h2>Список заведений</h2>
+
+{% for establishment in establishments %}
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ establishment.title }}</h5>
+            <p class="card-text">City: {{ establishment.city }}</p>
+            <p class="card-text">Address: {{ establishment.address }}</p>
+            <p class="card-text">Responses:</p>
+            <ul>
+                {% for response in establishment.get_responses %}
+                    <li>{{ response.question.question_text }}: {{ response.response_text }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

@@ -1,15 +1,20 @@
-<!-- establishments/templates/establishments/questions.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Answer Establishment Questions</title>
-</head>
-<body>
-    <h2>Answer Establishment Questions</h2>
-    <form method="post" action="{% url 'index' %}">
-        {% csrf_token %}
-        {{ question_form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+{% extends 'onboarding_forms/base.html' %}
+
+{% block title %}Добавление информации{% endblock %}
+
+{% block content %}
+
+<h2>Укажите информацию о вашем заведении</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {% for question in questions %}
+        <div class="form-group">
+            <label>{{ question.question_text }}</label>
+            <input type="text" name="response{{ question.id }}" class="form-control">
+        </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Готово</button>
+</form>
+
+{% endblock %}

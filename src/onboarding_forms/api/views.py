@@ -1,31 +1,41 @@
 from django.shortcuts import render, redirect
-from ..forms import EstablishmentTypeForm, EstablishmentQuestionForm, EstablishmentForm
-from ..models import Establishment, EstablishmentType
+
+from ..forms import EstablishmentForm
+from ..models import Establishment, EstablishmentQuestion, ClientResponse
 
 
-def index(request):
+def home(request):
     if request.method == 'POST':
-        establishment_type_form = EstablishmentTypeForm(request.POST)
-        if establishment_type_form.is_valid():
-            establishment_type = establishment_type_form.cleaned_data['establishment_type']
-            establishment_form = EstablishmentForm()
-            return render(request, 'onboarding_forms/details.html',
-                          {'establishment_type': establishment_type, 'establishment_form': establishment_form})
+        form = EstablishmentForm(request.POST)
+        if form.is_valid():
+            establishment = form.save()
+            return redirect('questions', establishment_id=establishment.id)
     else:
-        establishment_type_form = EstablishmentTypeForm()
-    return render(request, 'onboarding_forms/index.html', {'establishment_type_form': establishment_type_form})
+        form = EstablishmentForm()
+    return render(request, 'onboarding_forms/home.html', {'form': form})
 
 
-def save_establishment(request):
+def questions(request, establishment_id):
+    establishment = Establishment.objects.get(id=establishment_id)
+    questions = EstablishmentQuestion.objects.filter(establishment_type=establishment.establishment_type)
     if request.method == 'POST':
-        establishment_type = request.POST.get('establishment_type')
-        establishment_form = EstablishmentForm(request.POST)
+        for question in questions:
+            response_text = request.POST.get(f'response{question.id}')
+            response = ClientResponse(establishment=establishment, question=question, response_text=response_text)
+            response.save()
+        return redirect('success')
+    return render(request, 'onboarding_forms/questions.html', {
+        'establishment': establishment,
+        'questions': questions
+    })
 
-        if establishment_form.is_valid():
-            establishment = establishment_form.save(commit=False)
-            establishment.establishment_type_id = establishment_type
-            establishment.save()
 
-            question_form = EstablishmentQuestionForm(establishment_type=establishment_type)
-            return render(request, 'onboarding_forms/questions.html', {'question_form': question_form})
-    return redirect('index')
+def success(request):
+    return render(request, 'onboarding_forms/success.html')
+
+
+def establishments(request):
+    establishments_list = Establishment.objects.all()
+    return render(request, 'onboarding_forms/establishments.html', {
+        'establishments': establishments_list,
+    })
