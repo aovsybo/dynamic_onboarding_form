@@ -26,6 +26,9 @@ class Establishment(models.Model):
     def __str__(self):
         return self.title
 
+    def get_responses(self):
+        return ClientResponse.objects.filter(establishment=self)
+
 
 class ClientResponse(models.Model):
     establishment = models.ForeignKey(Establishment, on_delete=models.CASCADE)

@@ -1,6 +1,15 @@
-<!-- home.html -->
+{% extends 'onboarding_forms/base.html' %}
+
+{% block title %}Добавьте ваше заведение{% endblock %}
+
+{% block content %}
+
+<h2>Добавьте ваше заведение</h2>
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Next</button>
+    <button type="submit" class="btn btn-primary mt-3">Далее</button>
 </form>
+
+{% endblock %}

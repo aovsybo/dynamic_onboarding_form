@@ -1,10 +1,20 @@
-<!-- questions.html -->
+{% extends 'onboarding_forms/base.html' %}
+
+{% block title %}Добавление информации{% endblock %}
+
+{% block content %}
+
+<h2>Укажите информацию о вашем заведении</h2>
+
 <form method="post">
     {% csrf_token %}
-    <h2>Answer the following questions:</h2>
     {% for question in questions %}
-        <label>{{ question.question_text }}</label>
-        <input type="text" name="response{{ question.id }}"><br>
+        <div class="form-group">
+            <label>{{ question.question_text }}</label>
+            <input type="text" name="response{{ question.id }}" class="form-control">
+        </div>
     {% endfor %}
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn btn-primary">Готово</button>
 </form>
+
+{% endblock %}
